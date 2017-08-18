@@ -8,7 +8,7 @@ options = begin
           end
 if options[:help]
   puts PrettySearch::HELP_TEXT
-  return
+  exit
 end
 
 query = begin
