@@ -1,5 +1,7 @@
 require "pretty_search/version"
 
 module PrettySearch
-  # Your code goes here...
+  def self.run(query, options={})
+
+  end
 end

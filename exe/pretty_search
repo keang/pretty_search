@@ -12,4 +12,9 @@ if options[:help]
   return
 end
 
-PrettySearch.run(*ARGV, **options)
+query = begin
+          CliOptions.parse_query(ARGV)
+        rescue => e
+          abort e.message
+        end
+PrettySearch.run(query, **options)
