@@ -39,7 +39,8 @@ module PrettySearch
       matches = /\A([\w ]+)=(.+)\z/.match q_str
       if matches && matches[1] && matches[2]
         value = matches[2].strip
-        value = Integer(value) rescue value
+        value = Integer(value) rescue value if value.is_a?(String)
+        value = Float(value) rescue value if value.is_a?(String)
         value = true if value == 'true'
         value = false if value == 'false'
         return PrettySearch::SimpleQuery.new({ matches[1].strip => value})

@@ -34,6 +34,10 @@ RSpec.describe 'CliOptions' do
         PrettySearch::SimpleQuery.new({ '_id' => 3 })
       ],
       [
+        ['credit=1.2234123412341243'],
+        PrettySearch::SimpleQuery.new({ 'credit' => 1.2234123412341243 })
+      ],
+      [
         ['op=+'],
         PrettySearch::SimpleQuery.new({ 'op' => '+' })
       ],
