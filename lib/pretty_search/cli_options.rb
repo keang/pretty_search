@@ -1,6 +1,6 @@
 require 'getoptlong'
 
-module CliOptions
+module PrettySearch
   class InvalidQuery < StandardError; end
 
   class << self

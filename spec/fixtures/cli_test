@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
-require 'cli_options'
-CliOptions.parse_cli_opts
+require 'pretty_search/cli_options'
+PrettySearch.parse_cli_opts

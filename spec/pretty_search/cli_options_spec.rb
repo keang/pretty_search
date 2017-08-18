@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'open3'
 
-RSpec.describe CliOptions do
+RSpec.describe 'CliOptions' do
   describe '#parse_cli_opts' do
     it 'accepts --help' do
       _stdout, _stderr, status = Open3.capture3 './spec/fixtures/cli_test --help'
@@ -26,14 +26,14 @@ RSpec.describe CliOptions do
     ]
     valid_cases.each do |query, result|
       it "parses a single field: #{query}" do
-        expect(described_class.parse_query(query)).to eq(result)
+        expect(PrettySearch.parse_query(query)).to eq(result)
       end
     end
 
     it 'raises error for invalid argument' do
       expect do
-        described_class.parse_query(['name='])
-      end.to raise_error(CliOptions::InvalidQuery)
+        PrettySearch.parse_query(['name='])
+      end.to raise_error(PrettySearch::InvalidQuery)
     end
   end
 end

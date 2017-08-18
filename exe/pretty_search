@@ -1,20 +1,19 @@
 #!/usr/bin/env ruby
 require 'pretty_search'
-require 'cli_options'
 
 options = begin
-            CliOptions.parse_cli_opts
+            PrettySearch.parse_cli_opts
           rescue GetoptLong::Error
             abort
           end
 if options[:help]
-  puts CliOptions::HELP_TEXT
+  puts PrettySearch::HELP_TEXT
   return
 end
 
 query = begin
-          CliOptions.parse_query(ARGV)
+          PrettySearch.parse_query(ARGV)
         rescue => e
           abort e.message
         end
-PrettySearch.run(query, **options)
+PrettySearch.run(query, options)
