@@ -1,4 +1,5 @@
 require 'json'
+require 'byebug'
 require 'pretty_search/version'
 require 'pretty_search/cli_options'
 require 'pretty_search/query'
@@ -22,7 +23,7 @@ private
   def self.search(query, data, **options)
     collection = PrettySearch::Collection.load(data)
     if options[:first]
-      PrettySearch::Document.new collection.first { |doc| query.match(doc) }
+      PrettySearch::Document.new(collection.first { |doc| query.match(doc) })
     else
       collection.select { |doc| query.match(doc) }
         .map { |doc| PrettySearch::Document.new doc }

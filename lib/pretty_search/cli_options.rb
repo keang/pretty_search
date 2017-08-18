@@ -10,7 +10,7 @@ module PrettySearch
     #   }
     #
     def parse_cli_opts
-      abort 'Ruby 1.9.3 or newer is required' unless defined?(GetoptLong)
+      abort 'Ruby 2.0.0 or newer is required' unless defined?(GetoptLong)
       cli_opts = GetoptLong.new(
         [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
         [ '--data', '-d', GetoptLong::REQUIRED_ARGUMENT ],
