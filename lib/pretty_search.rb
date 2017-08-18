@@ -2,12 +2,13 @@ require 'json'
 require 'pretty_search/version'
 require 'pretty_search/cli_options'
 require 'pretty_search/query'
+require 'pretty_search/document'
 
 module PrettySearch
   class MissingParameter < StandardError; end
 
   def self.run(query, data:, **options)
-    self.print(self.search(query, data, **options))
+    puts self.search(query, data, **options)
   end
 
 private
