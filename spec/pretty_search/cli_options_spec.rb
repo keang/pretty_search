@@ -17,12 +17,32 @@ RSpec.describe 'CliOptions' do
   describe '#parse_query' do
     valid_cases = [
       # [query_args, expected_result],
-      [['name=value to match'], { 'name' => 'value to match' }],
-      [['shared=false'], { 'shared' => false }],
-      [['shared  =  false'], { 'shared' => false }],
-      [['_id  =  3'], { '_id' => 3 }],
-      [['op=+'], { 'op' => '+' }],
-      [['last_login_at=2013-08-04T01:03:27 -10:00'], { 'last_login_at' => '2013-08-04T01:03:27 -10:00' }]
+      [
+        ['name=value to match'],
+        PrettySearch::SimpleQuery.new({ 'name' => 'value to match' })
+      ],
+      [
+        ['shared=false'],
+        PrettySearch::SimpleQuery.new({ 'shared' => false })
+      ],
+      [
+        ['shared  =  false'],
+        PrettySearch::SimpleQuery.new({ 'shared' => false })
+      ],
+      [
+        ['_id  =  3'],
+        PrettySearch::SimpleQuery.new({ '_id' => 3 })
+      ],
+      [
+        ['op=+'],
+        PrettySearch::SimpleQuery.new({ 'op' => '+' })
+      ],
+      [
+        ['last_login_at=2013-08-04T01:03:27 -10:00'],
+        PrettySearch::SimpleQuery.new({
+          'last_login_at' => '2013-08-04T01:03:27 -10:00'
+        }),
+      ],
     ]
     valid_cases.each do |query, result|
       it "parses a single field: #{query}" do

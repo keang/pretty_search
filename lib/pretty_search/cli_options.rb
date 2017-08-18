@@ -25,17 +25,15 @@ module PrettySearch
       options
     end
 
+    # @return [PrettySearch::Query, #match]
+    #
     def parse_query(args)
       parse_single_field(args[0])
     end
 
   private
 
-    # @return [Hash] like:
-    #   {
-    #     [String] field_name => [String] value_to_match,
-    #     ...
-    #   }
+    # @return [PrettySearch::SimpleQuery, #match]
     #
     def parse_single_field(q_str)
       matches = /\A([\w ]+)=(.+)\z/.match q_str
@@ -44,7 +42,7 @@ module PrettySearch
         value = Integer(value) rescue value
         value = true if value == 'true'
         value = false if value == 'false'
-        return { matches[1].strip => value}
+        return PrettySearch::SimpleQuery.new({ matches[1].strip => value})
       else
         raise InvalidQuery.new("Cannot understand query: #{q_str}")
       end
