@@ -1,4 +1,4 @@
-require 'json'
+require 'yajl/json_gem'
 require 'byebug'
 require 'pretty_search/version'
 require 'pretty_search/cli_options'

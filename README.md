@@ -22,8 +22,8 @@ Or install it yourself as:
 ## Usage
 
 ### When you can throw RAM at your problem, and only search once:
+`pretty_search --data users.json name='Raylan Givens'`
 `pretty_search --first --data users.json name='Raylan Givens'`
-`pretty_search --all --data users.json name='Raylan Givens'`
 
 ### When you are poor on RAM or data is big:
 `pretty_search --large-data users.json name='Raylan Givens'`

@@ -6,6 +6,7 @@ RSpec.describe 'CliOptions' do
     [
       '--help',
       '--data FILE',
+      '-d FILE',
       '--data FILE --first',
     ].each do |options|
       it "accepts #{options}" do
@@ -22,7 +23,7 @@ RSpec.describe 'CliOptions' do
 
   describe 'HELP_TEXT' do
     it 'includes all supported option flags' do
-      %w(data help large first).each do |flag|
+      %w(data help first).each do |flag|
         expect(PrettySearch::HELP_TEXT).to include "--#{flag}"
       end
     end
