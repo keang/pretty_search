@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "pretty_search"
+require "cli_options"
+require "byebug"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

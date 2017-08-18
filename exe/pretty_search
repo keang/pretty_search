@@ -1,45 +1,15 @@
 #!/usr/bin/env ruby
 require 'pretty_search'
-require 'getoptlong'
+require 'cli_options'
 
-def parse_cli_opts
-  cli_opts = GetoptLong.new(
-    [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
-    [ '--data', '-d', GetoptLong::REQUIRED_ARGUMENT ],
-  )
-  options = {}
-  cli_opts.each do |option, args|
-    # args is "" for options without an argument
-    options[option[2..-1].to_sym] = args == "" ? true : args
-  end
-  options
-rescue GetoptLong::Error
-  abort
+options = begin
+            CliOptions.parse_cli_opts
+          rescue GetoptLong::Error
+            abort
+          end
+if options[:help]
+  puts CliOptions::HELP_TEXT
+  return
 end
 
-def help_text
-  <<~EOF
-    pretty_search [OPTION] ... QUERY
-
-    Example:
-      pretty_search --data ./fixtures/users.json name='Raylan Givens'
-
-    -h, --help:
-       show help
-
-    --data FILE, -d FILE:
-       the file to search on
-  EOF
-end
-
-if defined?(GetoptLong)
-  options = parse_cli_opts
-  if options[:help]
-    puts help_text
-    return
-  end
-
-  PrettySearch.run(**options)
-else
-  abort 'Ruby 1.9.3 or newer is required'
-end
+PrettySearch.run(*ARGV, **options)

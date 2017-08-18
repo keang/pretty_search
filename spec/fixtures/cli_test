@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'cli_options'
+CliOptions.parse_cli_opts
