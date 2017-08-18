@@ -12,8 +12,8 @@ module PrettySearch
     if data.nil?
       raise MissingParameter.new('Data file is required, please pass in as --data')
     end
-    t = self.search(query, data, **options)
-    puts t
+    found = self.search(query, data, **options)
+    puts found.join("\n")
   end
 
 private
