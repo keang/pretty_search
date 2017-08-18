@@ -7,8 +7,12 @@ require 'pretty_search/document'
 module PrettySearch
   class MissingParameter < StandardError; end
 
-  def self.run(query, data:, **options)
-    puts self.search(query, data, **options)
+  def self.run(query, data: nil, **options)
+    if data.nil?
+      raise MissingParameter.new('Data file is required, please pass in as --data')
+    end
+    t = self.search(query, data, **options)
+    puts t
   end
 
 private
@@ -17,9 +21,10 @@ private
   def self.search(query, data, **options)
     collection = load_collection(data)
     if options[:first]
-      collection.first { |doc| query.match(doc) }
+      PrettySearch::Document.new collection.first { |doc| query.match(doc) }
     else
       collection.select { |doc| query.match(doc) }
+        .map { |doc| PrettySearch::Document.new doc }
     end
   end
 

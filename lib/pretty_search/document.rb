@@ -5,7 +5,7 @@ class PrettySearch::Document
     @data = data
   end
 
-  def to_str
+  def to_s
     JSON.pretty_generate(data)
   end
 end

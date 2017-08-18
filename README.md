@@ -1,5 +1,5 @@
 # PrettySearch
-- ruby 1.9.3 or newer
+- ruby 2.0.0 or newer
 
 Searches given collection in json files and return human readable formats
 

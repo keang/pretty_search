@@ -25,5 +25,10 @@ RSpec.describe PrettySearch do
 
       it { expect(PrettySearch.send(:search, query, data)).to be_empty }
     end
+
+    context 'when no data file is given' do
+      let(:query) { PrettySearch::SimpleQuery.new({}) }
+      it { expect{PrettySearch.run(query)}.to raise_error(PrettySearch::MissingParameter) }
+    end
   end
 end

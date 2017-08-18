@@ -24,16 +24,16 @@ module PrettySearch
     end
   end
 
-  HELP_TEXT = <<~EOF
-    pretty_search [OPTION] ... QUERY
+  HELP_TEXT = <<-EOF
+pretty_search [OPTION] ... QUERY
 
-    Example:
-      pretty_search --data ./fixtures/users.json name='Raylan Givens'
+Example:
+  pretty_search --data ./fixtures/users.json name='Raylan Givens'
 
-    -h, --help:
-       show help
+-h, --help:
+   show help
 
-    --data FILE, -d FILE:
-       the file to search on
+--data FILE, -d FILE:
+   the file to search on
   EOF
 end
