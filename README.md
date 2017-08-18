@@ -1,4 +1,5 @@
 # PrettySearch
+- ruby 1.9.3 or newer
 
 Searches given collection in json files and return human readable formats
 
@@ -21,17 +22,17 @@ Or install it yourself as:
 ## Usage
 
 ### When you can throw RAM at your problem, and only search once:
-`pretty_search --first -d users.json -q name:"Raylan Givens"`
-`pretty_search --all -d users.json -q name:"Raylan Givens"`
+`pretty_search --first --data users.json name:"Raylan Givens"`
+`pretty_search --all --data users.json name:"Raylan Givens"`
+
+### When you are poor on RAM or data is big:
+`pretty_search --large-data users.json name:"Raylan Givens"`
 
 ### When you can throw RAM at your problem, and doing many searches:
-`pretty_search -d users.json`
-`pretty_search -q name:"Raylan Givens"`
-`pretty_search -q tags:"Foxworth"`
-
-### When you are poor on RAM/data is big:
-`pretty_search --slim -d users.json`
-`pretty_search -q name:"Raylan Givens"`
+`pretty_search start --data users.json`
+`pretty_search name:"Raylan Givens"`
+`pretty_search tags:"Foxworth"`
+`pretty_search stop`
 
 ## Development
 
