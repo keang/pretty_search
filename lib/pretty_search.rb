@@ -23,7 +23,8 @@ private
   def self.search(query, data, **options)
     collection = PrettySearch::Collection.load(data)
     if options[:first]
-      PrettySearch::Document.new(collection.first { |doc| query.match(doc) })
+      found = collection.first { |doc| query.match(doc) }
+      Array(PrettySearch::Document.new(found))
     else
       collection.select { |doc| query.match(doc) }
         .map { |doc| PrettySearch::Document.new doc }

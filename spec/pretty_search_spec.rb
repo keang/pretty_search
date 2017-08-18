@@ -16,6 +16,13 @@ RSpec.describe PrettySearch do
         found = PrettySearch.send(:search, query, data)
         expect(found.count).to eq 2
       end
+
+      context 'when first:true' do
+        it 'returns only 1 match' do
+          found = PrettySearch.send(:search, query, data, first: true)
+          expect(found.count).to eq 1
+        end
+      end
     end
 
     context 'when there are no matches' do

@@ -12,8 +12,9 @@ module PrettySearch
     def parse_cli_opts
       abort 'Ruby 2.0.0 or newer is required' unless defined?(GetoptLong)
       cli_opts = GetoptLong.new(
-        [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
-        [ '--data', '-d', GetoptLong::REQUIRED_ARGUMENT ],
+        [ '--help',  '-h', GetoptLong::NO_ARGUMENT ],
+        [ '--first', '-f', GetoptLong::NO_ARGUMENT ],
+        [ '--data',  '-d', GetoptLong::REQUIRED_ARGUMENT ],
       )
       options = {}
       cli_opts.each do |option, args|
@@ -35,5 +36,8 @@ Example:
 
 --data FILE, -d FILE:
    the file to search on
+
+--first, -f:
+   returns when first match is found. Omit this flag to return all matches.
   EOF
 end
