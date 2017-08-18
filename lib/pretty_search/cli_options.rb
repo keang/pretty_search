@@ -1,8 +1,6 @@
 require 'getoptlong'
 
 module PrettySearch
-  class InvalidQuery < StandardError; end
-
   class << self
 
     # @return [Hash] like:
@@ -24,31 +22,6 @@ module PrettySearch
       end
       options
     end
-
-    # @return [PrettySearch::Query, #match]
-    #
-    def parse_query(args)
-      parse_single_field(args[0])
-    end
-
-  private
-
-    # @return [PrettySearch::SimpleQuery, #match]
-    #
-    def parse_single_field(q_str)
-      matches = /\A([\w ]+)=(.+)\z/.match q_str
-      if matches && matches[1] && matches[2]
-        value = matches[2].strip
-        value = Integer(value) rescue value if value.is_a?(String)
-        value = Float(value) rescue value if value.is_a?(String)
-        value = true if value == 'true'
-        value = false if value == 'false'
-        return PrettySearch::SimpleQuery.new({ matches[1].strip => value})
-      else
-        raise InvalidQuery.new("Cannot understand query: #{q_str}")
-      end
-    end
-
   end
 
   HELP_TEXT = <<~EOF

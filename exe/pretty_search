@@ -12,7 +12,7 @@ if options[:help]
 end
 
 query = begin
-          PrettySearch.parse_query(ARGV)
+          PrettySearch::Query.parse(ARGV)
         rescue => e
           abort e.message
         end

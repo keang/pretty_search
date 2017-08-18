@@ -13,7 +13,7 @@ module PrettySearch
 
 private
 
-  # @return [PrettySearch::Document, #each]
+  # @return [Array<PrettySearch::Document>, #each]
   def self.search(query, data, **options)
     collection = load_collection(data)
     if options[:first]
