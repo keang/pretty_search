@@ -1,15 +1,19 @@
 module PrettySearch
   # @abstract
   # PrettySearch::Collection is the abstract class representing
-  # a searchable collection of records. Implementations should implement #each
+  # a searchable collection of records.
+  #
+  # Implementations should include:
+  #  - #search(PrettySearch::Query) returning Array<PrettySearch::Document>
+  #
   # See implementations in lib/pretty_search/collection
   #
   class Collection
-    include Enumerable
 
-    # @return [PrettySearch::Collection, #each]
-    def self.load(data_file)
-      PrettySearch::MemoryCollection.new(data_file)
+    # @return [PrettySearch::Collection, #search]
+    #
+    def self.load(data_file, options={})
+      PrettySearch::MemoryCollection.new(data_file, first: options[:first])
     end
   end
 end

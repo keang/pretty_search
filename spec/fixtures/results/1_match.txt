@@ -1,0 +1,23 @@
+{
+  "_id": 1,
+  "external_id": "74341f74-9c79-49d5-9611-87ef9b6eb75f",
+  "name": "Raylan Givens",
+  "created_at": "2016-04-15T05:19:46 -10:00",
+  "active": true,
+  "verified": true,
+  "shared": false,
+  "locale": "en-AU",
+  "timezone": "Sri Lanka",
+  "last_login_at": "2013-08-04T01:03:27 -10:00",
+  "email": "test@example.com",
+  "phone": "8335-422-718",
+  "organization_id": 119,
+  "tags": [
+    "Springville",
+    "Sutton",
+    "Hartsville/Hartley",
+    "Diaperville"
+  ],
+  "suspended": true,
+  "role": "admin"
+}

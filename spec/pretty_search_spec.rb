@@ -13,14 +13,16 @@ RSpec.describe PrettySearch do
       end
 
       it 'returns all matching objects' do
-        found = PrettySearch.send(:search, query, data)
-        expect(found.count).to eq 2
+        pretty_result = PrettySearch.run(query, data: data)
+        expected_result = File.read('spec/fixtures/results/2_matches.txt')
+        expect(pretty_result).to eq expected_result.chop
       end
 
       context 'when first:true' do
         it 'returns only 1 match' do
-          found = PrettySearch.send(:search, query, data, first: true)
-          expect(found.count).to eq 1
+          pretty_result = PrettySearch.run(query, data: data, first: true)
+          expected_result = File.read('spec/fixtures/results/1_match.txt')
+          expect(pretty_result).to eq expected_result.chop
         end
       end
     end
@@ -30,7 +32,7 @@ RSpec.describe PrettySearch do
         PrettySearch::SimpleQuery.new({ 'suspended' => 123 })
       end
 
-      it { expect(PrettySearch.send(:search, query, data)).to be_empty }
+      it { expect(PrettySearch.run(query, data: data)).to eq '' }
     end
 
     context 'when no data file is given' do

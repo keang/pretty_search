@@ -4,13 +4,21 @@ module PrettySearch
   # from beginning to end when searching
   #
   class MemoryCollection < Collection
-    def initialize(data_file)
+    def initialize(data_file, first: false)
       @data_file = data_file
+      @first = first
     end
 
-    def each(&block)
+    # @return [Array<PrettySearch::Document>]
+    def search(query)
       data = Yajl::Parser.parse(File.new(@data_file))
-      data.each(&block)
+      if @first
+        found = data.first { |doc| query.match(doc) }
+        Array(PrettySearch::Document.new(found))
+      else
+        data.select { |doc| query.match(doc) }
+          .map { |doc| PrettySearch::Document.new doc }
+      end
     end
   end
 end
