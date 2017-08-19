@@ -56,6 +56,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/keang/pretty_search. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+## TODO
+- For large file, read json file in chunk, and search on each chunk in memory
+- A PrettySearch::CsvCollection to read csv (better for chunked searching)
+- A PrettySearch::RedisCollection which load records onto a local redis for a persistent searching session, and using the index_field as redis key
 
 ## License
 
