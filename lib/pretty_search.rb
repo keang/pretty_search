@@ -1,5 +1,7 @@
 require 'yajl/json_gem'
+require 'yajl'
 require 'byebug'
+
 require 'pretty_search/version'
 require 'pretty_search/cli_options'
 require 'pretty_search/query'
