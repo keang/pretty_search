@@ -16,4 +16,9 @@ query = begin
         rescue => e
           abort e.message
         end
-puts PrettySearch.run(query, options)
+results = begin
+            PrettySearch.run(query, options)
+          rescue => e
+            abort e.message
+          end
+puts results

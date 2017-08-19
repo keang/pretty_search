@@ -36,6 +36,12 @@ RSpec.describe PrettySearch do
       it { expect(PrettySearch.run(query, data: data, first: true)).to eq 'No records found.' }
     end
 
+    context 'when data file is invalid json' do
+      let(:data) { './spec/fixtures/invalid.json' }
+      let(:query) { PrettySearch::SimpleQuery.new({}) }
+      it { expect{PrettySearch.run(query, data: data)}.to raise_error(Yajl::ParseError) }
+    end
+
     context 'when no data file is given' do
       let(:query) { PrettySearch::SimpleQuery.new({}) }
       it { expect{PrettySearch.run(query)}.to raise_error(PrettySearch::MissingParameter) }
