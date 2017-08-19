@@ -2,6 +2,8 @@
 class PrettySearch::Query
   class InvalidQuery < StandardError; end
 
+  EPSILON = 10**-10
+
   # @return [PrettySearch::Query, #match]
   #
   def self.parse(args)
@@ -55,7 +57,14 @@ class PrettySearch::SimpleQuery < PrettySearch::Query
 
   def match(doc)
     attr.all? do |key, value|
-      doc[key] == value # floats are compared as strings
+      case doc[key]
+      when Float
+        (doc[key] - value).abs < EPSILON
+      when Array
+        doc[key].include? value
+      else
+        doc[key] == value
+      end
     end
   end
 
