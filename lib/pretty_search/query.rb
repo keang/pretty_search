@@ -1,8 +1,6 @@
 # @abstract
 class PrettySearch::Query
-
   class InvalidQuery < StandardError; end
-
 
   # @return [PrettySearch::Query, #match]
   #
@@ -18,13 +16,25 @@ class PrettySearch::Query
       matches = PrettySearch::SimpleQuery::SIMPLE_PATTERN.match q_str
       if matches && matches[1] && matches[2]
         value = matches[2].strip
-        value = Integer(value) rescue value if value.is_a?(String)
-        value = Float(value) rescue value if value.is_a?(String)
+        if value.is_a?(String)
+          value = begin
+                    Integer(value)
+                  rescue
+                    value
+                  end
+        end
+        if value.is_a?(String)
+          value = begin
+                    Float(value)
+                  rescue
+                    value
+                  end
+        end
         value = true if value == 'true'
         value = false if value == 'false'
         parsed_queries[matches[1].strip] = value
       else
-        raise InvalidQuery.new("Cannot understand query: #{q_str}")
+        raise InvalidQuery, "Cannot understand query: #{q_str}"
       end
     end
 
@@ -35,7 +45,7 @@ end
 # Simple query that matches returns matches when all fields
 # matches fully
 class PrettySearch::SimpleQuery < PrettySearch::Query
-  SIMPLE_PATTERN = /\A([\w ]+)=(.+)\z/.freeze
+  SIMPLE_PATTERN = /\A([\w ]+)=(.+)\z/
 
   attr_reader :attr
 

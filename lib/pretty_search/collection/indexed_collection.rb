@@ -8,7 +8,7 @@ module PrettySearch
   class IndexedCollection < Collection
     def initialize(data_file, index_field: nil, first: false)
       if index_field.nil?
-        raise MissingParameter.new('Field name to be indexed required')
+        raise MissingParameter, 'Field name to be indexed required'
       end
       data = Yajl::Parser.parse(File.new(data_file))
       @index_field = index_field
@@ -23,7 +23,7 @@ module PrettySearch
       scoped.select { |doc| query.match(doc) }
     end
 
-  private
+    private
 
     def build_index(data, index_field)
       Hash.new([]).tap do |index|

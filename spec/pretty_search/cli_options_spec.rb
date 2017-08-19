@@ -7,7 +7,7 @@ RSpec.describe 'CliOptions' do
       '--help',
       '--data FILE',
       '-d FILE',
-      '--data FILE --first',
+      '--data FILE --first'
     ].each do |options|
       it "accepts #{options}" do
         _stdout, _stderr, status = Open3.capture3 "./spec/fixtures/cli_test #{options}"
@@ -23,7 +23,7 @@ RSpec.describe 'CliOptions' do
 
   describe 'HELP_TEXT' do
     it 'includes all supported option flags' do
-      %w(data help first).each do |flag|
+      %w[data help first].each do |flag|
         expect(PrettySearch::HELP_TEXT).to include "--#{flag}"
       end
     end

@@ -13,7 +13,7 @@ module PrettySearch
 
   def self.run(query, data: nil, **options)
     if data.nil?
-      raise MissingParameter.new('Data file is required, please pass in as --data')
+      raise MissingParameter, 'Data file is required, please pass in as --data'
     end
     collection = PrettySearch::Collection.load(data, options)
     found = collection.search(query)

@@ -2,7 +2,7 @@ RSpec.shared_examples 'searchable collection' do
   context 'with SimpleQuery' do
     context 'when there is only a single match' do
       let(:query) do
-        PrettySearch::SimpleQuery.new({ 'suspended' => false, '_id' => 2 })
+        PrettySearch::SimpleQuery.new('suspended' => false, '_id' => 2)
       end
       it 'returns 1 record' do
         expect(subject.search(query).count).to eq 1
@@ -11,7 +11,7 @@ RSpec.shared_examples 'searchable collection' do
 
     context 'when there are multiple matches' do
       let(:query) do
-        PrettySearch::SimpleQuery.new({ 'suspended' => false })
+        PrettySearch::SimpleQuery.new('suspended' => false)
       end
       it 'returns all records' do
         expect(subject.search(query).count).to eq 2
@@ -20,7 +20,7 @@ RSpec.shared_examples 'searchable collection' do
 
     context 'when there are no matches' do
       let(:query) do
-        PrettySearch::SimpleQuery.new({ 'suspended' => 'non-existing-value' })
+        PrettySearch::SimpleQuery.new('suspended' => 'non-existing-value')
       end
       it 'returns empty' do
         expect(subject.search(query)).to be_empty

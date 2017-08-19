@@ -6,4 +6,3 @@ RSpec.describe PrettySearch::MemoryCollection do
   subject { described_class.new(data_file) }
   it_behaves_like 'searchable collection'
 end
-

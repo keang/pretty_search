@@ -9,11 +9,10 @@ module PrettySearch
   # See implementations in lib/pretty_search/collection
   #
   class Collection
-
     # @return [PrettySearch::Collection, #search]
     # TODO: return IndexedCollection when multiple searches is supported
     #
-    def self.load(data_file, options={})
+    def self.load(data_file, options = {})
       PrettySearch::MemoryCollection.new(data_file, first: options[:first])
     end
   end

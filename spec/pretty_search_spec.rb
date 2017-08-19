@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe PrettySearch do
   it 'has a version number' do
@@ -9,7 +9,7 @@ RSpec.describe PrettySearch do
     let(:data) { './spec/fixtures/users.json' }
     context 'when there are matches' do
       let(:query) do
-        PrettySearch::SimpleQuery.new({ 'suspended' => false })
+        PrettySearch::SimpleQuery.new('suspended' => false)
       end
 
       it 'returns all matching objects' do
@@ -29,7 +29,7 @@ RSpec.describe PrettySearch do
 
     context 'when there are no matches' do
       let(:query) do
-        PrettySearch::SimpleQuery.new({ 'suspended' => 123 })
+        PrettySearch::SimpleQuery.new('suspended' => 123)
       end
 
       it { expect(PrettySearch.run(query, data: data)).to eq 'No records found.' }
@@ -39,12 +39,12 @@ RSpec.describe PrettySearch do
     context 'when data file is invalid json' do
       let(:data) { './spec/fixtures/invalid.json' }
       let(:query) { PrettySearch::SimpleQuery.new({}) }
-      it { expect{PrettySearch.run(query, data: data)}.to raise_error(Yajl::ParseError) }
+      it { expect { PrettySearch.run(query, data: data) }.to raise_error(Yajl::ParseError) }
     end
 
     context 'when no data file is given' do
       let(:query) { PrettySearch::SimpleQuery.new({}) }
-      it { expect{PrettySearch.run(query)}.to raise_error(PrettySearch::MissingParameter) }
+      it { expect { PrettySearch.run(query) }.to raise_error(PrettySearch::MissingParameter) }
     end
   end
 end

@@ -21,7 +21,7 @@ module PrettySearch
         end
       else
         data.select { |doc| query.match(doc) }
-          .map { |doc| PrettySearch::Document.new doc }
+            .map { |doc| PrettySearch::Document.new doc }
       end
     end
   end
