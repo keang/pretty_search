@@ -32,7 +32,8 @@ RSpec.describe PrettySearch do
         PrettySearch::SimpleQuery.new({ 'suspended' => 123 })
       end
 
-      it { expect(PrettySearch.run(query, data: data)).to eq '' }
+      it { expect(PrettySearch.run(query, data: data)).to eq 'No records found.' }
+      it { expect(PrettySearch.run(query, data: data, first: true)).to eq 'No records found.' }
     end
 
     context 'when no data file is given' do

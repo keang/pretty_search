@@ -13,8 +13,12 @@ module PrettySearch
     def search(query)
       data = Yajl::Parser.parse(File.new(@data_file))
       if @first
-        found = data.first { |doc| query.match(doc) }
-        Array(PrettySearch::Document.new(found))
+        found = data.detect { |doc| query.match(doc) }
+        if found
+          Array(PrettySearch::Document.new(found))
+        else
+          []
+        end
       else
         data.select { |doc| query.match(doc) }
           .map { |doc| PrettySearch::Document.new doc }

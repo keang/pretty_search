@@ -17,6 +17,10 @@ module PrettySearch
     end
     collection = PrettySearch::Collection.load(data, options)
     found = collection.search(query)
-    found.join("\n")
+    if found.empty?
+      'No records found.'
+    else
+      found.join("\n")
+    end
   end
 end
