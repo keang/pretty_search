@@ -1,4 +1,7 @@
 # PrettySearch
+
+[![Build Status](https://travis-ci.org/keang/pretty_search.svg?branch=master)](https://travis-ci.org/keang/pretty_search)
+
 - ruby 2.0.0 or newer
 
 Searches given collection in json files and return human readable formats
