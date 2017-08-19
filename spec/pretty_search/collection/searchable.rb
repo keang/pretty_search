@@ -1,8 +1,8 @@
 RSpec.shared_examples 'searchable collection' do
   context 'with SimpleQuery' do
-    context 'when there is only a single matche' do
+    context 'when there is only a single match' do
       let(:query) do
-        PrettySearch::SimpleQuery.new({ 'suspended' => true })
+        PrettySearch::SimpleQuery.new({ 'suspended' => false, '_id' => 2 })
       end
       it 'returns 1 record' do
         expect(subject.search(query).count).to eq 1

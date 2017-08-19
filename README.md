@@ -22,13 +22,19 @@ Or install it yourself as:
 ## Usage
 
 ### When you can throw RAM at your problem, and only search once:
+Return all records:
 `pretty_search --data users.json name='Raylan Givens'`
+
+Return only first record found:
 `pretty_search --first --data users.json name='Raylan Givens'`
 
-### When you are poor on RAM or data is big:
+Chain queries, searching for records where `shared=false` *AND* `suspended=true`:
+`pretty_search --first --data users.json shared=false suspended=true`
+
+### [TODO] When you are poor on RAM or data is big:
 `pretty_search --large-data users.json name='Raylan Givens'`
 
-### When you can throw RAM at your problem, and doing many searches:
+### [TODO] When you can throw RAM at your problem, and doing many searches:
 `pretty_search --data users.json start`
 `pretty_search name='Raylan Givens'`
 `pretty_search tags='Foxworth'`

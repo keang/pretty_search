@@ -7,30 +7,38 @@ class PrettySearch::Query
   # @return [PrettySearch::Query, #match]
   #
   def self.parse(args)
-    parse_simple(args[0])
+    parse_simple(args)
   end
 
   # @return [PrettySearch::SimpleQuery, #match]
   #
-  def self.parse_simple(q_str)
-    matches = /\A([\w ]+)=(.+)\z/.match q_str
-    if matches && matches[1] && matches[2]
-      value = matches[2].strip
-      value = Integer(value) rescue value if value.is_a?(String)
-      value = Float(value) rescue value if value.is_a?(String)
-      value = true if value == 'true'
-      value = false if value == 'false'
-      return PrettySearch::SimpleQuery.new({ matches[1].strip => value})
-    else
-      raise InvalidQuery.new("Cannot understand query: #{q_str}")
+  def self.parse_simple(q_strs)
+    parsed_queries = {}
+    q_strs.each do |q_str|
+      matches = PrettySearch::SimpleQuery::SIMPLE_PATTERN.match q_str
+      if matches && matches[1] && matches[2]
+        value = matches[2].strip
+        value = Integer(value) rescue value if value.is_a?(String)
+        value = Float(value) rescue value if value.is_a?(String)
+        value = true if value == 'true'
+        value = false if value == 'false'
+        parsed_queries[matches[1].strip] = value
+      else
+        raise InvalidQuery.new("Cannot understand query: #{q_str}")
+      end
     end
+
+    PrettySearch::SimpleQuery.new(parsed_queries)
   end
 end
 
 # Simple query that matches returns matches when all fields
 # matches fully
 class PrettySearch::SimpleQuery < PrettySearch::Query
+  SIMPLE_PATTERN = /\A([\w ]+)=(.+)\z/.freeze
+
   attr_reader :attr
+
   def initialize(attr)
     @attr = attr
   end

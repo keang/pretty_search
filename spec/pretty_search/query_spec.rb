@@ -9,16 +9,16 @@ RSpec.describe PrettySearch::SimpleQuery do
         PrettySearch::SimpleQuery.new({ 'name' => 'value to match' })
       ],
       [
-        ['shared=false'],
-        PrettySearch::SimpleQuery.new({ 'shared' => false })
+        ['name=value to match', 'shared=false', 'id=3'],
+        PrettySearch::SimpleQuery.new({
+          'name'   => 'value to match',
+          'shared' => false,
+          'id'     => 3,
+        })
       ],
       [
         ['shared  =  false'],
         PrettySearch::SimpleQuery.new({ 'shared' => false })
-      ],
-      [
-        ['_id  =  3'],
-        PrettySearch::SimpleQuery.new({ '_id' => 3 })
       ],
       [
         ['credit=1.2234123412341243'],
@@ -43,7 +43,7 @@ RSpec.describe PrettySearch::SimpleQuery do
 
     it 'raises error for invalid argument' do
       expect do
-        PrettySearch::Query.parse(['name='])
+        PrettySearch::Query.parse(['some=thing', 'name='])
       end.to raise_error(PrettySearch::Query::InvalidQuery)
     end
   end
