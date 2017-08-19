@@ -11,6 +11,7 @@ module PrettySearch
   class Collection
 
     # @return [PrettySearch::Collection, #search]
+    # TODO: return IndexedCollection when multiple searches is supported
     #
     def self.load(data_file, options={})
       PrettySearch::MemoryCollection.new(data_file, first: options[:first])
@@ -19,3 +20,4 @@ module PrettySearch
 end
 
 require 'pretty_search/collection/memory_collection'
+require 'pretty_search/collection/indexed_collection'

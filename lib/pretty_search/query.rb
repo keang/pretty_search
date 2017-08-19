@@ -41,6 +41,10 @@ class PrettySearch::SimpleQuery < PrettySearch::Query
     end
   end
 
+  def [](key)
+    attr[key]
+  end
+
   # Used in specs
   def ==(o)
     attr == o.attr
